@@ -1,4 +1,4 @@
-# tech-iot-node
+# IoT Arduino Boilerplate
 Arduino IoT boilerplate using Node.js and Johnny-Five
 
 This uses [Node.js](https://nodejs.org/) with [Johnny-Five](http://johnny-five.io/api) for programming a device (e.g. Arduino) running the [Firmata Protocol](https://github.com/firmata/protocol).
