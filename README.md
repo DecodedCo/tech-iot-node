@@ -12,7 +12,7 @@ This uses [Node.js](https://nodejs.org/) with [Johnny-Five](http://johnny-five.i
 
 ## Arduino setup
 
-Done! Just
+Firmata has already been installed on your Arduino, so just supply it power and you are good to go!
 
 ## Development
 
