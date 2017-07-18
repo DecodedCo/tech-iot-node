@@ -1,5 +1,7 @@
 # CbD Sensor Lab Cheat Sheet!
 
+<img src="./images/arduino_meme.png" />
+
 ## Find Yourself in a Pickle?
 We all do sometimes. No fear, we've got your back! Click on your sensor from the list below to check out the fritzing diagram to wire your hardware and the code to make it work.
 
