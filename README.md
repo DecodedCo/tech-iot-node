@@ -22,21 +22,25 @@ We all do sometimes. No fear, we've got your back! Click on your sensor from the
 <img src="/images/joystick_fritz.png" /></br>
 
 ```
-// Put the code within the board.on() function already written within the arduino.js file
+var five = require("johnny-five");
+var board = new five.Board();
 
-// Create a new `joystick` hardware instance.
-var joystick = new five.Joystick({
-  //   [ x, y ]
-  pins: ["A0", "A1"]
+board.on("ready", function() {
+
+  // Create a new `joystick` hardware instance.
+  var joystick = new five.Joystick({
+    //   [ x, y ]
+    pins: ["A0", "A1"]
+  });
+
+  joystick.on("change", function() {
+    console.log("Joystick");
+    console.log("  x : ", this.x);
+    console.log("  y : ", this.y);
+    console.log("--------------------------------------");
+  });
+
 });
-
-joystick.on("change", function() {
-  console.log("Joystick");
-  console.log("  x : ", this.x);
-  console.log("  y : ", this.y);
-  console.log("--------------------------------------");
-});
-
 ```
 
 <h2 id="laser">Laser</h2>
@@ -54,7 +58,6 @@ board.on("ready", function() {
   laser.on();
 
 });
-
 ```
 
 <h2 id="microphone">Microphone</h2>
@@ -74,7 +77,6 @@ board.on("ready", function() {
     led.brightness(this.value >> 2);
   });
 });
-
 ```
 
 <h2 id="piezo">Piezo</h2>
@@ -83,16 +85,11 @@ board.on("ready", function() {
 
 ```
 var five = require("johnny-five"),
-  board = new five.Board();
+var board = new five.Board();
 
 board.on("ready", function() {
-  // Creates a piezo object and defines the pin to be used for the signal
+  // Creates a piezo object defining the pin to be used for the signal
   var piezo = new five.Piezo(3);
-
-  // Injects the piezo into the repl
-  board.repl.inject({
-    piezo: piezo
-  });
 
   // Plays a song
   piezo.play({
@@ -122,7 +119,7 @@ board.on("ready", function() {
     tempo: 100
   });
 
-  // Plays the same song with a string representation
+  // OR use the code below. Same song, different formatting
   piezo.play({
     // song is composed by a string of notes
     // a default beat is set, and the default octave is used
@@ -133,7 +130,6 @@ board.on("ready", function() {
   });
 
 });
-
 ```
 
 <h2 id="photoresistor">Photoresistor</h2>
@@ -141,12 +137,11 @@ board.on("ready", function() {
 <img src="/images/photoresistor_fritz.png" /></br>
 
 ```
-var five = require("johnny-five"),
-  board, photoresistor;
-
-board = new five.Board();
+var five = require("johnny-five");
+var board = new five.Board();
 
 board.on("ready", function() {
+  var photoresistor;
 
   // Create a new `photoresistor` hardware instance.
   photoresistor = new five.Sensor({
@@ -154,19 +149,11 @@ board.on("ready", function() {
     freq: 250
   });
 
-  // Inject the `sensor` hardware into
-  // the Repl instance's context;
-  // allows direct command line access
-  board.repl.inject({
-    pot: photoresistor
-  });
-
   // "data" get the current reading from the photoresistor
   photoresistor.on("data", function() {
     console.log(this.value);
   });
 });
-
 ```
 
 <h2 id="rgb">RGB Led</h2>
@@ -175,9 +162,9 @@ board.on("ready", function() {
 
 ```
 var five = require("johnny-five");
+var board = new five.Board();
 
-
-five.Board().on("ready", function() {
+board.on("ready", function() {
 
   // Initialize the RGB LED
   var led = new five.Led.RGB({
@@ -198,15 +185,12 @@ five.Board().on("ready", function() {
   // }
   //var led = new five.Led.RGB([3,5,6]);
 
-
   // Turn it on and set the initial color
   led.on();
   led.color("#FF0000");
-
   led.blink(1000);
 
 });
-
 ```
 
 <h2 id="servo">Servo</h2>
@@ -231,45 +215,27 @@ board.on("ready", function() {
     startAt: 90,       // Immediately move to a degree
     center: true,      // overrides startAt if true and moves the servo to the center of the range
   });
-  
 
-  // Servo API
-
-  // min()
-  //
-  // set the servo to the minimum degrees
+  // min() - set the servo to the minimum degrees
   // defaults to 0
-  //
-  // eg. servo.min();
+  // servo.min();
 
-  // max()
-  //
-  // set the servo to the maximum degrees
+  // max() - set the servo to the maximum degrees
   // defaults to 180
-  //
-  // eg. servo.max();
+  // servo.max();
 
-  // center()
-  //
-  // centers the servo to 90°
-  //
+  // center() - centers the servo to 90°
   // servo.center();
 
-  // to( deg )
-  //
-  // Moves the servo to position by degrees
-  //
+  // to( deg ) - Moves the servo to position by degrees
   // servo.to( 90 );
 
-  // step( deg )
-  //
-  // step all servos by deg
-  //
-  // eg. array.step( -20 );
+  // step( deg ) - step all servos by deg
+  // array.step( -20 );
 
+  // or use sweep() to automate all of the above
   servo.sweep();
 });
-
 ```
 
 <h2 id="misc">Misc</h2>
