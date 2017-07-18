@@ -158,7 +158,7 @@ board.on("ready", function() {
 
 <h2 id="rgb">RGB Led</h2>
 
-<img src="/images/rgb_fritz.png" width: 300px; /></br>
+<img src="./images/rgb_fritz.png" /></br>
 
 ```
 var five = require("johnny-five");
@@ -195,7 +195,7 @@ board.on("ready", function() {
 
 <h2 id="servo">Servo</h2>
 
-![](./images/servo_fritz.png | width=300)
+<img src="./images/rgb_fritz.png" /></br>
 
 ```
 var five = require("johnny-five");
