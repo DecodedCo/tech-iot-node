@@ -195,7 +195,7 @@ board.on("ready", function() {
 
 <h2 id="servo">Servo</h2>
 
-<img src="./images/rgb_fritz.png" /></br>
+<img src="./images/servo_fritz.png" /></br>
 
 ```
 var five = require("johnny-five");
