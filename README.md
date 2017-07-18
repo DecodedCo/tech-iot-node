@@ -22,7 +22,20 @@ We all do sometimes. No fear, we've got your back! Click on your sensor from the
 <img src="/images/joystick_fritz.png" /></br>
 
 ```
-Add Code
+// Put the code within the board.on() function already written within the arduino.js file
+
+// Create a new `joystick` hardware instance.
+var joystick = new five.Joystick({
+  //   [ x, y ]
+  pins: ["A0", "A1"]
+});
+
+joystick.on("change", function() {
+  console.log("Joystick");
+  console.log("  x : ", this.x);
+  console.log("  y : ", this.y);
+  console.log("--------------------------------------");
+});
 
 ```
 
@@ -31,7 +44,16 @@ Add Code
 <img src="/images/laser_fritz.png" /></br>
 
 ```
-Add Code
+var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  // Create a new `Led` hardware instance named laser.
+  var laser = new five.Led(9);
+
+  laser.on();
+
+});
 
 ```
 
@@ -40,7 +62,18 @@ Add Code
 <img src="/images/microphone_fritz.png" /></br>
 
 ```
-Add Code
+var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  var mic = new five.Sensor("A0");
+  var led = new five.Led(11);
+
+  // This mic will make an led brightness change based on the sound
+  mic.on("data", function() {
+    led.brightness(this.value >> 2);
+  });
+});
 
 ```
 
@@ -49,7 +82,57 @@ Add Code
 <img src="/images/piezo_fritz.png" /></br>
 
 ```
-Add Code
+var five = require("johnny-five"),
+  board = new five.Board();
+
+board.on("ready", function() {
+  // Creates a piezo object and defines the pin to be used for the signal
+  var piezo = new five.Piezo(3);
+
+  // Injects the piezo into the repl
+  board.repl.inject({
+    piezo: piezo
+  });
+
+  // Plays a song
+  piezo.play({
+    // song is composed by an array of pairs of notes and beats
+    // The first argument is the note (null means "no note")
+    // The second argument is the length of time (beat) of the note (or non-note)
+    song: [
+      ["C4", 1 / 4],
+      ["D4", 1 / 4],
+      ["F4", 1 / 4],
+      ["D4", 1 / 4],
+      ["A4", 1 / 4],
+      [null, 1 / 4],
+      ["A4", 1],
+      ["G4", 1],
+      [null, 1 / 2],
+      ["C4", 1 / 4],
+      ["D4", 1 / 4],
+      ["F4", 1 / 4],
+      ["D4", 1 / 4],
+      ["G4", 1 / 4],
+      [null, 1 / 4],
+      ["G4", 1],
+      ["F4", 1],
+      [null, 1 / 2]
+    ],
+    tempo: 100
+  });
+
+  // Plays the same song with a string representation
+  piezo.play({
+    // song is composed by a string of notes
+    // a default beat is set, and the default octave is used
+    // any invalid note is read as "no note"
+    song: "C D F D A - A A A A G G G G - - C D F D G - G G G G F F F F - -",
+    beats: 1 / 4,
+    tempo: 100
+  });
+
+});
 
 ```
 
@@ -58,7 +141,31 @@ Add Code
 <img src="/images/photoresistor_fritz.png" /></br>
 
 ```
-Add Code
+var five = require("johnny-five"),
+  board, photoresistor;
+
+board = new five.Board();
+
+board.on("ready", function() {
+
+  // Create a new `photoresistor` hardware instance.
+  photoresistor = new five.Sensor({
+    pin: "A2",
+    freq: 250
+  });
+
+  // Inject the `sensor` hardware into
+  // the Repl instance's context;
+  // allows direct command line access
+  board.repl.inject({
+    pot: photoresistor
+  });
+
+  // "data" get the current reading from the photoresistor
+  photoresistor.on("data", function() {
+    console.log(this.value);
+  });
+});
 
 ```
 
@@ -67,7 +174,38 @@ Add Code
 <img src="/images/rgb_fritz.png" /></br>
 
 ```
-Add Code
+var five = require("johnny-five");
+
+
+five.Board().on("ready", function() {
+
+  // Initialize the RGB LED
+  var led = new five.Led.RGB({
+    pins: {
+      red: 6,
+      green: 5,
+      blue: 3
+    }
+  });
+
+  // RGB LED alternate constructor
+  // This will normalize an array of pins in [r, g, b]
+  // order to an object (like above) that's shaped like:
+  // {
+  //   red: r,
+  //   green: g,
+  //   blue: b
+  // }
+  //var led = new five.Led.RGB([3,5,6]);
+
+
+  // Turn it on and set the initial color
+  led.on();
+  led.color("#FF0000");
+
+  led.blink(1000);
+
+});
 
 ```
 
@@ -76,7 +214,61 @@ Add Code
 <img src="/images/servo_fritz.png" /></br>
 
 ```
-Add Code
+var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  var servo = new five.Servo(10);
+
+  // Servo alternate constructor with options
+  var servo = new five.Servo({
+    id: "MyServo",     // User defined id
+    pin: 10,           // Which pin is it attached to?
+    type: "standard",  // Default: "standard". Use "continuous" for continuous rotation servos
+    range: [0,180],    // Default: 0-180
+    fps: 100,          // Used to calculate rate of movement between positions
+    invert: false,     // Invert all specified positions
+    startAt: 90,       // Immediately move to a degree
+    center: true,      // overrides startAt if true and moves the servo to the center of the range
+  });
+  
+
+  // Servo API
+
+  // min()
+  //
+  // set the servo to the minimum degrees
+  // defaults to 0
+  //
+  // eg. servo.min();
+
+  // max()
+  //
+  // set the servo to the maximum degrees
+  // defaults to 180
+  //
+  // eg. servo.max();
+
+  // center()
+  //
+  // centers the servo to 90°
+  //
+  // servo.center();
+
+  // to( deg )
+  //
+  // Moves the servo to position by degrees
+  //
+  // servo.to( 90 );
+
+  // step( deg )
+  //
+  // step all servos by deg
+  //
+  // eg. array.step( -20 );
+
+  servo.sweep();
+});
 
 ```
 
