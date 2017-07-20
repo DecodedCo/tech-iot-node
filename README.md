@@ -20,7 +20,6 @@ We all do sometimes. No fear, we've got your back! Click on your sensor from the
 <h2 id="joystick">Joystick</h2>
 
 <img src="/images/joystick_fritz.png" /></br>
-
 ```
 var five = require("johnny-five");
 var board = new five.Board();
@@ -62,19 +61,20 @@ board.on("ready", function() {
 <h2 id="microphone">Microphone</h2>
 
 <img src="/images/microphone_fritz.png" /></br>
-
 ```
 var five = require("johnny-five");
 var board = new five.Board();
 
 board.on("ready", function() {
   var mic = new five.Sensor("A0");
-  var led = new five.Led(11);
 
-  // This mic will make an led brightness change based on the sound
+  // This will print the microphone value in your terminal
   mic.on("data", function() {
-    led.brightness(this.value >> 2);
+    console.log(this.value);
   });
+
+  //Once see you the microphone value printing in the console, maybe try and turn the led on when it goes above a certain value
+
 });
 ```
 
