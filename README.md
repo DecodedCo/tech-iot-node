@@ -26,6 +26,7 @@ var five = require("johnny-five");
 var board = new five.Board();
 
 board.on("ready", function() {
+  // Before using this code look on the sensor and dbl check that the wires are connected to the right pins on the bread board and on the Arduino (each pin is labeled on the sensor - GND, 5V, VRx, VRy)
 
   // Create a new `joystick` hardware instance.
   var joystick = new five.Joystick({
@@ -46,7 +47,6 @@ board.on("ready", function() {
 <h2 id="laser">Laser</h2>
 
 <img src="/images/laser_fritz.png" /></br>
-
 ```
 var five = require("johnny-five");
 var board = new five.Board();
@@ -59,7 +59,6 @@ board.on("ready", function() {
 
 });
 ```
-
 <h2 id="microphone">Microphone</h2>
 
 <img src="/images/microphone_fritz.png" /></br>
