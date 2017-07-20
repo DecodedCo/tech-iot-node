@@ -148,7 +148,7 @@ board.on("ready", function() {
 
 <h2 id="rgb">RGB Led</h2>
 
-<img src="./images/rgb_fritz.png" style="width:200px;"/></br>
+<img src="./images/rgb_fritz.png" style="width:70%;"/></br>
 ```
 var five = require("johnny-five");
 var board = new five.Board();
