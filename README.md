@@ -81,7 +81,6 @@ board.on("ready", function() {
 <h2 id="piezo">Piezo</h2>
 
 <img src="/images/piezo_fritz.png" /></br>
-
 ```
 var five = require("johnny-five"),
 var board = new five.Board();
@@ -124,7 +123,6 @@ board.on("ready", function() {
 <h2 id="photoresistor">Photoresistor</h2>
 
 <img src="/images/photoresistor_fritz.png" /></br>
-
 ```
 var five = require("johnny-five");
 var board = new five.Board();
@@ -142,6 +140,9 @@ board.on("ready", function() {
   photoresistor.on("data", function() {
     console.log(this.value);
   });
+
+  // Once see you the photoresistor value printing in the console, maybe try and turn the led on when it goes above a certain value
+
 });
 ```
 
