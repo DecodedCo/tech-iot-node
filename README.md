@@ -53,7 +53,7 @@ var board = new five.Board();
 
 board.on("ready", function() {
   // Create a new `Led` hardware instance named laser.
-  var laser = new five.Led(9);
+  var laser = new five.Led(3);
 
   laser.on();
 
