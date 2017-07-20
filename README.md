@@ -166,29 +166,19 @@ var board = new five.Board();
 
 board.on("ready", function() {
 
-  // Initialize the RGB LED
+  // Initialize the RGB Led
   var led = new five.Led.RGB({
     pins: {
-      red: 6,
+      red: 3,
       green: 5,
-      blue: 3
+      blue: 6
     }
   });
 
-  // RGB LED alternate constructor
-  // This will normalize an array of pins in [r, g, b]
-  // order to an object (like above) that's shaped like:
-  // {
-  //   red: r,
-  //   green: g,
-  //   blue: b
-  // }
-  //var led = new five.Led.RGB([3,5,6]);
-
-  // Turn it on and set the initial color
-  led.on();
-  led.color("#FF0000");
-  led.blink(1000);
+// Turn it on and set the initial color
+led.on();
+led.color("#0000ff");
+led.blink(1000);
 
 });
 ```
