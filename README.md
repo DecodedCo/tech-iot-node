@@ -13,8 +13,6 @@ We all do sometimes. No fear, we've got your back! Click on your sensor from the
   <li><a href="#piezo">Piezo</a></li>
   <li><a href="#photoresistor">Photoresistor</a></li>
   <li><a href="#rgb">RGB Led</a></li>
-  <li><a href="#servo">Servo</a></li>
-  <li><a href="#misc">Misc</a></li>
 </ul>
 
 <h2 id="joystick">Joystick</h2>
@@ -148,7 +146,7 @@ board.on("ready", function() {
 
 <h2 id="rgb">RGB Led</h2>
 
-<img src="./images/rgb_fritz.png" alt="RGB Fritzing Diagram" style="width: 70%;"/></br>
+<img src="./images/rgb_fritz.png" alt="RGB Fritzing Diagram" width="200px" /></br>
 
 ```
 var five = require("johnny-five");
@@ -172,14 +170,3 @@ led.blink(1000);
 
 });
 ```
-
-<h2 id="misc">Misc</h2>
-
-Still find yourself confused on what exactly is going on with your sensor? Here's a couple of questions to ask yourself or your buddy:
-
-1. Is my sensor an input or an output?
-In other words, will my sensor send information to my computer in order FINISH
-
-2. In my sensor analog or digital FINISH
-
-3. FINISH
